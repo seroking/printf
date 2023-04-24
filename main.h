@@ -1,6 +1,3 @@
-								/* Mohamed Amine Barid - yassir haouane */
-
-
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -16,7 +13,7 @@ typedef struct conversion
 	int (*f)(va_list);
 	char *letter;
 
-}convert_t;
+} convert_t;
 
 
 								/* STANDARS LIBRARIES */
@@ -34,7 +31,10 @@ int _printf(const charformat, ...);
 
 
 
+								/* FORMAT FUNCTIONS */
+int print_char(va_list list);
+int print_string(va_list list);
+int print_percent(__attribute__((unused))va_list list);
 
-int _putchar(char c);
 
 #endif
