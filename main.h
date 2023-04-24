@@ -32,9 +32,9 @@ int _printf(const charformat, ...);
 
 
 								/* FORMAT FUNCTIONS */
-int print_char(va_list list);
-int print_string(va_list list);
-int print_percent(__attribute__((unused))va_list list);
+int put_char(va_list get_list);
+int put_str(va_list get_list);
+int put_percent(__attribute__((unused))va_list get_list);
 
 
 #endif
