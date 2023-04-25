@@ -1,25 +1,53 @@
 #include "main.h"
+#include <stdio.h>
 
-int printf(const char *format, ...)
-{
-	int count_print;
 
-	convert_t list_format[] = {
-		{"c", put_char},
-		{"s", put_str},
-		{"%", put_percent},
-		{NULL, NULL}
-	};
-
+int _printf(const char *format, ...) {
 	va_list args;
-
-	if (format == NULL)
-		return (-1);
-
 	va_start(args, format);
-	count_print = choices(format, list_f, args);
-	va_end(args);
 
-	return (count_print);
-}
+	int count = 0;
+	for (; *format != '\0'; format++) {
+		if (*format == '%') {
+			format++;
+			switch (*format) {
+				case 'c': {
+						  char c = (char) va_arg(args, int);
+						  putchar(c);
+						  count++;
+						  break;
+					  }
+				case 's': {
+						  char *s = va_arg(args, char *);
+						  while (*s != '\0') {
+							  _putchar(*s);
+							  s++;
+							  count++;
+						  }
+						  break;
+					  }
+				case 'd':
+				case 'i': {
+						  int value = va_arg(args, int);
+						  print_int(value, &count);
+						  break;
+					  }
+				case '%': {
+						  _putchar('%');
+						  count++;
+						  break;
+					  }
+				default: {
+						 // unsupported conversion specifier, do nothing
+						 break;
+					 }
+			}
+		} else {
+			_putchar(*format);
+			count++;
+		}
+	}
+
+	va_end(args);
+	return count;
 }
